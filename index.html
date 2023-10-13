@@ -29,6 +29,24 @@
     flex-shrink: 0;
     transition: left 0.15s;
   }
+  .slide_button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top : 50%;
+    width:2vw;
+    height:4vh;
+    background-color: #cccc;
+    border-radius: 100%;
+    cursor: pointer;
+  }
+  .next{
+    left:75vw;
+  }
+  .prev{
+    left:5vw;
+  }
 </style>
 </head>
 <body>
@@ -41,6 +59,8 @@
         <li><img src="./image/3.jpg"></li>
         <li><img src="./image/4.jpg"></li>
         <li><img src="./image/5.jpg"></li>
+        <div class="slide_button prev">◀</div>
+        <div class="slide_button next">▶</div>
       </ul>
       <div></div>
     </div>
