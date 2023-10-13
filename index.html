@@ -30,6 +30,7 @@
     height: 40vh;
     flex-shrink: 0;
     transition: left 0.15s;
+    margin-right:1vw;
   }
   .slide_button{
     display: flex;
@@ -68,83 +69,118 @@
   </div>
 <script>
   const slide = document.querySelector('.slide');
+  //현재 슬라이드 넓이
   let slideWidth = slide.clientWidth;
 
   const prevBtn = document.querySelector('.prev');
   const nextBtn = document.querySelector('.next');
 
+  // 슬라이드 전체 개수
   let slideLi = document.querySelectorAll('.slide_item');
-
   const maxSlide = slideLi.length;
 
-  let currentSlide = 1;
-
-
-
+  
+  
+  // 처음 슬라이드
   const startSlide = slideLi[0];
+  // 마지막 슬라이드
   const endSlide = slideLi[slideLi.length-1];
+  // 요소 생성
   const startChild = document.createElement('li');
   const endChild = document.createElement('li');
-
-  startSlide.classList.forEach((e) => startChild.classList.add(e));
-  startChild.innerHTML = startSlide.innerHTML;
-
-  endSlide.classList.forEach((e) => endChild.classList.add(e));
-  endChild.innerHTML = endSlide.innerHTML;
-
-  slideLi[0].before(endChild);
-  slideLi[slideLi.length-1].after(startChild)
-
-
   
 
+  // 첫슬라이드의 모든 상태요소들을 새로 만든 요소에 추가
+  startSlide.classList.forEach((e) => startChild.classList.add(e));
+  // 첫슬라이드 li의 내용물을 생성된 li슬라이드에 추가하여 복제
+  startChild.innerHTML = startSlide.innerHTML;
+  
+  endSlide.classList.forEach((e) => endChild.classList.add(e));
+  endChild.innerHTML = endSlide.innerHTML;
+  
+
+  // 첫 슬라이드 앞쪽에 마지막슬라이드의 복제, 마지막슬라이드 뒤쪽에 첫 슬라이드의 복제를 추가하여 무한루프 생성
+  slideLi[0].before(endChild);
+  slideLi[slideLi.length-1].after(startChild)
+  
+  
+  
+  
+  // 슬라이드의 현재위치를 선언
+  let currentSlide = 1;
+  
+  // 슬라이드 위치 초기화
+  let offset = slideWidth;
+  slideLi.forEach((e) => {
+    e.setAttribute("style", `left: ${-offset}px`);
+  });
+
+
+  // 다음버튼 눌렀을때 함수
+  function nextMove() {
+    // 버튼을 누를때마다 현재페이지번호값(핸들러)가 1씩 증가
+    currentSlide++;
+    // 현재 슬라이드가 마지막 슬라이드를 넘지 않을때
+    if(currentSlide <= maxSlide){
+      // 슬라이드 길이값 * 현재슬라이드 값만큼
+      const offset = slideWidth * currentSlide;
+      //모든 슬라이드(li)의 포지션을 왼쪽으로 밀어버림(재설정함)
+      slideLi.forEach((e) => {
+        e.setAttribute("style", `left: ${-offset}px`);
+      }); 
+    
+     // 현재 슬라이드위치가 마지막 슬라이드를 넘었을때
+    } else {
+      // 클릭시 슬라이드 번호를 첫번째로 초기화해주고
+      currentSlide = 1;
+      // 해당 포지션으로 모든 슬라이드의 위치를 밀어(재설정)해준다 
+      let offset = slideWidth * currentSlide;
+      slideLi.forEach((e) =>{
+        e.setAttribute('style', `transition:${0.15}s; left:${-offset}px`)
+      })
+      
+    }
+  }
+  
+
+  // 이전버튼 눌렀을때 함수
+  function prevMove() {
+    // 버튼을 누를때마다 현재페이지 번호값이 1씩 감소
+    currentSlide--;
+    // 현재 슬라이드가 첫번째 슬라이드 이상일 때
+    if(currentSlide >0){
+      // 슬라이드 길이값 * 현재슬라이드 값만큼
+      const offset = slideWidth * currentSlide;
+      //모든 슬라이드(li)의 포지션을 오른쪽으로 밀어버림(재설정함)
+      slideLi.forEach((e) => {
+        e.setAttribute("style", `left: ${-offset}px`);
+      }); 
+
+    // 현재 슬라이드 위치가 0번째(첫번째 슬라이드 앞에 복제된 마지막 슬라이드)에 도달했을때
+    } else {
+      // 현재 슬라이드의 번호값을 마지막 슬라이드의 번호값으로 설정해주고
+      currentSlide = maxSlide
+      // 해당 포지션으로 모든 슬라이드의 위치를 밀어(재설정)해준다.
+      let offset = slideWidth * currentSlide;
+      slideLi.forEach((e) =>{
+        e.setAttribute('style', `transition:${0.15}s; left:${-offset}px`)
+      })
+  
+    }
+  }
+  
+
+  // 함수작동 클릭이벤트
   prevBtn.addEventListener('click', ()=>{
     prevMove();
   })
-
+  
   nextBtn.addEventListener('click', ()=> {
     nextMove();
   })
 
-
-  function nextMove() {
-    currentSlide++;
-    if(currentSlide <= maxSlide){
-      const offset = slideWidth * currentSlide;
-      slideLi.forEach((e) => {
-        e.setAttribute("style", `left: ${-offset}px`);
-      }); 
-    } else {
-      currentSlide = 0;
-      currentSlide++
-      let offset = slideWidth * currentSlide;
-      slideLi.forEach((e) =>{
-        e.setAttribute('style', `transition:${0.15}s; left:${-offset}px`)
-      })
-
-    }
-  }
-
-  function prevMove() {
-    currentSlide--;
-    if(currentSlide >0){
-      const offset = slideWidth * currentSlide;
-      slideLi.forEach((e) => {
-      e.setAttribute("style", `left: ${-offset}px`);
-      }); 
-    } else {
-      currentSlide = maxSlide + 1 ;
-      currentSlide--
-      let offset = slideWidth * currentSlide;
-      slideLi.forEach((e) =>{
-        e.setAttribute('style', `transition:${0.15}s; left:${-offset}px`)
-      })
   
-    }
-  }
-
-
-
 </script>
+
 </body>
 </html>
