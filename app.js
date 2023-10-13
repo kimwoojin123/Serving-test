@@ -9,7 +9,13 @@ const contentType = {
 http.createServer((req, res) => {
     if (req.method === 'GET' && req.url === '/') {
         res.writeHead(200, contentType);
-        fs.readFile('index.html', (err, data) => {});
+        fs.readFile('index.html', (err, data) => {
+            if (err) {
+                console.log('파일 호출 에러');
+            } else {
+                res.end(data);
+            }
+        });
     } else {
         res.writeHead(404, contentType);
     }
