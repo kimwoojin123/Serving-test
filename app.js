@@ -20,4 +20,4 @@ http.createServer((req, res) => {
         res.writeHead(404, contentType);
         res.end('<h1>요청 페이지를 찾을 수 없음</h1>');
     }
-});
+}).listen(8080);
