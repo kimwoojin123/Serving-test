@@ -87,7 +87,8 @@
 
   const startSlide = slideLi[0];
   const endSlide = slideLi[slideLi.length-1];
-
+  const startChild = document.createElement('li');
+  const lastChild = document.createElement('li');
 
   prevBtn.addEventListener('click', ()=>{
     prevMove();
