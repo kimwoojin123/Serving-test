@@ -6,6 +6,7 @@
   <title>Document</title>
 <style>
   *{margin:0; padding:0; box-sizing: border-box;}
+ 
   #root{
     width:100vw;
     height:100vh;
@@ -16,7 +17,8 @@
     flex-wrap:nowrap;
     overflow:hidden;
     position:relative;
-    width:80vw  ;
+    width:100%;
+
   }
   .slide_item {
     display: flex;
@@ -25,7 +27,7 @@
     position: relative;
     left: 0px;
     width: 100%;
-    height: 30vh;
+    height: 40vh;
     flex-shrink: 0;
     transition: left 0.15s;
   }
@@ -42,7 +44,7 @@
     cursor: pointer;
   }
   .next{
-    left:75vw;
+    left:93vw;
   }
   .prev{
     left:5vw;
@@ -62,7 +64,6 @@
         <div class="slide_button prev">◀</div>
         <div class="slide_button next">▶</div>
       </ul>
-      <div></div>
     </div>
   </div>
 <script>
@@ -78,11 +79,6 @@
 
   let currentSlide = 1;
 
-
-  let offset = slideWidth + currentSlide;
-  slideLi.forEach((e) => {
-    e.setAttribute("style",`left${offset}px`)
-  })
 
 
   const startSlide = slideLi[0];
@@ -154,7 +150,7 @@
     }
   }
 
-  
+
 
 </script>
 </body>
