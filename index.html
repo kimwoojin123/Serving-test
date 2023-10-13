@@ -81,7 +81,7 @@
 
   let offset = slideWidth + currentSlide;
   slideLi.forEach((e) => {
-    e.setAttribute('style',`left${offset}px`)
+    e.setAttribute("style",`left${offset}px`)
   })
 
   prevBtn.addEventListener('click', ()=>{
@@ -92,7 +92,15 @@
     nextMove();
   })
 
-
+  function nextMove() {
+    currentSlide++;
+    if(currentSlide <= maxSlide){
+      const offset = slideWidth * currentSlide;
+      slideItems.forEach((e) => {
+        e.setAttribute("style", `left: ${-offset}px`);
+      }); 
+    }
+  }
 
 </script>
 </body>
