@@ -90,6 +90,15 @@
   const startChild = document.createElement('li');
   const lastChild = document.createElement('li');
 
+  startSlide.classList.forEach((e) => startChild.classList.add(e));
+  startChild.innerHTML = startSlide.innerHTML;
+
+  endSlide.classList.forEach((e) => endChild.classList.add(e));
+  endChild.innerHTML = endSlide.innerHTML;
+
+
+  
+
   prevBtn.addEventListener('click', ()=>{
     prevMove();
   })
