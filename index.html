@@ -88,13 +88,16 @@
   const startSlide = slideLi[0];
   const endSlide = slideLi[slideLi.length-1];
   const startChild = document.createElement('li');
-  const lastChild = document.createElement('li');
+  const endChild = document.createElement('li');
 
   startSlide.classList.forEach((e) => startChild.classList.add(e));
   startChild.innerHTML = startSlide.innerHTML;
 
   endSlide.classList.forEach((e) => endChild.classList.add(e));
   endChild.innerHTML = endSlide.innerHTML;
+
+  slideLi[0].before(endChild);
+  slideLi[slideLi.length-1].after(startChild)
 
 
   
