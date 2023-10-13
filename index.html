@@ -118,14 +118,10 @@
       currentSlide = 0;
       currentSlide++
       let offset = slideWidth * currentSlide;
-      // slideLi.forEach((e) =>{
-      //   e.setAttribute('style', `transition:${0}s; left:${-offset}px`)
-      // })
-      setTimeout(() =>{
-        slideLi.forEach((e) =>{
-          e.setAttribute('style', `transition:${0.15}s; left:${-offset}px`)
-        })
-      },0);
+      slideLi.forEach((e) =>{
+        e.setAttribute('style', `transition:${0.15}s; left:${-offset}px`)
+      })
+
     }
   }
 
@@ -140,14 +136,10 @@
       currentSlide = maxSlide + 1 ;
       currentSlide--
       let offset = slideWidth * currentSlide;
-      // slideLi.forEach((e) =>{
-      //   e.setAttribute('style', `transition:${0}s; left:${-offset}px`)
-      // })
-      setTimeout(() =>{
-        slideLi.forEach((e) =>{
-          e.setAttribute('style', `transition:${0.15}s; left:${-offset}px`)
-        })
-      },0);
+      slideLi.forEach((e) =>{
+        e.setAttribute('style', `transition:${0.15}s; left:${-offset}px`)
+      })
+  
     }
   }
 
