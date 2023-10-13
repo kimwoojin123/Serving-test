@@ -124,6 +124,12 @@
       slideLi.forEach((e) =>{
         e.setAttribute('style', `transtion:%{0}s; left:${-offset}px`)
       })
+      setTimeout(() =>{
+        slideLi.forEach((e) =>{
+          e.setAttribute('style', `transtion:%{0.15}s; left:${-offset}px`)
+        })
+      },0);
+      
     }
   }
 
