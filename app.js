@@ -2,8 +2,7 @@ const http = require('http');
 const fs = require('fs');
 
 const contentType = {
-    'Content-Type': 'text/html',
-    charset: 'utf-8',
+    'Content-Type': 'text/html;charset=utf-8',
 };
 
 http.createServer((req, res) => {
