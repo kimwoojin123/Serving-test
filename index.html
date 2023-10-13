@@ -117,7 +117,14 @@
       slideLi.forEach((e) => {
       e.setAttribute("style", `left: ${-offset}px`);
       }); 
-    } 
+    } else {
+      currentSlide = 0;
+      currentSlide++
+      let offset = slideWidth * currentSlide;
+      slideLi.forEach((e) =>{
+        e.setAttribute('style', `transtion:%{0}s; left:${-offset}px`)
+      })
+    }
   }
 
 </script>
