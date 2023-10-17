@@ -1,9 +1,13 @@
 const http = require('http');
 const fs = require('fs');
-
+const path = require(`path`);
 const contentType = {
     'Content-Type': 'text/html;charset=utf-8',
 };
+function serverErrorLog() {
+    res.writeHead(500);
+    return res.end('서버에 문제가 생겼습니다.');
+}
 
 http.createServer((req, res) => {
     if (req.method === 'GET' && req.url === '/') {
@@ -14,6 +18,17 @@ http.createServer((req, res) => {
             } else {
                 res.end(data);
             }
+        });
+    } else if (req.url.startsWith('/image/')) {
+        let imageName = path.basename(req.url);
+        let imagePath = './image/' + imageName;
+
+        fs.readFile(imagePath, (err, data) => {
+            if (err) {
+                serverErrorLog();
+            }
+            res.writeHead(200, { 'Contant-Type': 'image/jpg' });
+            res.end(data);
         });
     } else {
         res.writeHead(404, contentType);
